@@ -28,7 +28,7 @@ class Pipeline:
     
     def to(self, device: DeviceLike):
         self.hourglass_model = self.hourglass_model.to(device)
-        self.esmfold_embed_only_module = self.esmfold_embed_only_module.to(device)
+        # self.esmfold_embed_only_module = self.esmfold_embed_only_module.to(device)
         self.device = device
         return self
     
@@ -37,10 +37,10 @@ class Pipeline:
         x_uncompressed = self.hourglass_model.decode(x_compressed, mask) 
         return self.latent_scaler.unscale(x_uncompressed)
     
-    def __call__(self, sequences: Union[str, List[str]]) -> Tuple[torch.Tensor, torch.Tensor]:
+    def __call__(self, sequences: Union[str, List[str]], emb, mask) -> Tuple[torch.Tensor, torch.Tensor]:
         """Given the original ESMFold latent, normalize and compress using the loaded checkpoint."""
-        res = self.esmfold_embed_only_module.infer_embedding(sequences)
-        emb, mask = res['s'], res['mask']
+        # res = self.esmfold_embed_only_module.infer_embedding(sequences)
+        # emb, mask = res['s'], res['mask']
         emb, mask = emb.to(self.device), mask.to(self.device)
 
         emb = self.latent_scaler.scale(emb)
