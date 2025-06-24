@@ -66,7 +66,7 @@ def get_pipeline(
     model: HourglassProteinCompressionTransformer,
     device: str = "cuda",
 ):
-    esmfold_embed_only = esmfold_v1_embed_only()
+    esmfold_embed_only = # esmfold_v1_embed_only()
     return Pipeline(hourglass_model=model, esmfold_embed_only_module=esmfold_embed_only, device=device)
 
 
