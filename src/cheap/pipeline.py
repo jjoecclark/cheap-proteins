@@ -22,7 +22,7 @@ class Pipeline:
         ):
         super().__init__()
         self.hourglass_model = hourglass_model.to(device)
-        self.esmfold_embed_only_module = esmfold_embed_only_module.to(device)
+        self.esmfold_embed_only_module = None # esmfold_embed_only_module.to(device)
         self.latent_scaler = latent_scaler
         self.device = device
     
